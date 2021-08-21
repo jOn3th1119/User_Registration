@@ -27,6 +27,10 @@ export default class CreateUser extends Component {
 
   addUser = (e) => {
     e.preventDefault();
+
+    axios.post('/api/users/', this.state)
+      .then((res) => { this.setState({ redirect: true }); })
+      .catch(err => { this.setState({ msg: err.response.data.msg }); });
   };
 
 
