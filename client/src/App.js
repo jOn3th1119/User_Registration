@@ -1,6 +1,9 @@
 import { Link, Route, Switch } from 'react-router-dom';
 
+import CreateUser from './components/Users/CreateUser';
+import EditUser from './components/Users/EditUser';
 import React from 'react';
+import UserList from './components/Users/UserList';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         </ul>
       </div>
       <Switch>
+        <Route exact path="/" component={UserList} />
+        <Route path="/edit/:id" component={EditUser} />
+        <Route exact path="/create" component={CreateUser} />
       </Switch>
     </div>
   );
