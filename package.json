@@ -1,0 +1,21 @@
+{
+  "name": "user_registration",
+  "version": "1.0.0",
+  "description": "This is an activity that creates user registration",
+  "main": "server.js",
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jOn3th19/User_Registration.git"
+  },
+  "author": "Joneth Rudio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jOn3th19/User_Registration/issues"
+  },
+  "homepage": "https://github.com/jOn3th19/User_Registration#readme",
+  "dependencies": {}
+}
