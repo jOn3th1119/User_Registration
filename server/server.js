@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const config = require("config");
 const cors = require("cors");
 
+const users = require("./routes/api/users");
 const app = express();
 
 app.use(cors());
@@ -14,6 +15,8 @@ mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
+
+app.use("/api/users/", users);
 
 const port = process.env.PORT || 5000;
 

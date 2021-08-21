@@ -10,9 +10,19 @@ export default class UserList extends Component {
   };
 
   componentDidMount = () => {
+    axios.get('/api/users/')
+      .then(res => { this.setState({ users: res.data }); })
+      .catch((err) => console.log("Error: " + err));
   };
 
   deleteUser = (e, id) => {
+    e.preventDefault();
+    axios.delete('/api/users/' + id)
+      .catch((err) => console.log("Error: " + err));
+
+    axios.get('/api/users/')
+      .then(res => { this.setState({ users: res.data }); })
+      .catch((err) => console.log("Error: " + err));
   };
 
   render() {
