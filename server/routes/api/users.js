@@ -60,4 +60,28 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/:id', (req, res) => {
+  const { firstName, middleName, lastName, nameExt, birthDate, gender, address } = req.body;
+
+  User.findById(req.params.id)
+    .then(user => {
+      if (!firstName || !lastName || !birthDate || !gender || !address) {
+        return res.status(400).json({ msg: "Incomplete Fields!" });
+      }
+
+      user.firstName = firstName;
+      user.middleName = middleName;
+      user.lastName = lastName;
+      user.nameExt = nameExt;
+      user.birthDate = birthDate;
+      user.gender = gender;
+      user.address = address;
+
+      user.save()
+        .then(editedUser => res.json(editedUser))
+        .catch((err) => res.status(500).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
