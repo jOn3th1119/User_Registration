@@ -2,6 +2,26 @@ const express = require("express");
 
 const router = express.Router();
 const User = require("../../models/User");
+const bcrypt = require("bcryptjs");
+const config = require("config");
+
+router.get('/', (req, res) => {
+  User.find()
+    .then(user => res.json(user))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.get('/:id', (req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.delete("/:id", (req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(user => { res.json(user); })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.post('/', (req, res) => {
   const { firstName, middleName, lastName, nameExt, birthDate, gender, address, email, password, confirmPass } = req.body;
