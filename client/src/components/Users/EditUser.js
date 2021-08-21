@@ -17,6 +17,22 @@ export default class EditUser extends Component {
     redirect: false
   };
 
+  componentDidMount = () => {
+    axios.get('/api/users/' + this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          firstName: res.data.firstName,
+          middleName: res.data.middleName,
+          lastName: res.data.lastName,
+          nameExt: res.data.nameExt,
+          birthDate: moment(res.data.birthDate).format("YYYY-MM-DD"),
+          gender: res.data.gender,
+          address: res.data.address,
+        });
+      })
+      .catch((err) => console.log("Error: " + err));
+  };
+
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -25,6 +41,10 @@ export default class EditUser extends Component {
 
   addUser = (e) => {
     e.preventDefault();
+
+    axios.put('/api/users/' + this.props.match.params.id, this.state)
+      .then((res) => { this.setState({ redirect: true }); })
+      .catch(err => { this.setState({ msg: err.response.data.msg }); });
   };
 
   render() {
